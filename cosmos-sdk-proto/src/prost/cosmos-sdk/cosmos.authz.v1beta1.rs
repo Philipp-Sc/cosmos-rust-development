@@ -816,6 +816,12 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.authz.v1beta1.Query";
     }
 }
+/// GenesisState defines the authz module's genesis state.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenesisState {
+    #[prost(message, repeated, tag = "1")]
+    pub authorization: ::prost::alloc::vec::Vec<GrantAuthorization>,
+}
 /// EventGrant is emitted on Msg/Grant
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventGrant {
@@ -841,10 +847,4 @@ pub struct EventRevoke {
     /// Grantee account address
     #[prost(string, tag = "4")]
     pub grantee: ::prost::alloc::string::String,
-}
-/// GenesisState defines the authz module's genesis state.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    #[prost(message, repeated, tag = "1")]
-    pub authorization: ::prost::alloc::vec::Vec<GrantAuthorization>,
 }

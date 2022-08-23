@@ -1,3 +1,16 @@
+/// Equivocation implements the Evidence interface and defines evidence of double
+/// signing misbehavior.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Equivocation {
+    #[prost(int64, tag = "1")]
+    pub height: i64,
+    #[prost(message, optional, tag = "2")]
+    pub time: ::core::option::Option<::prost_types::Timestamp>,
+    #[prost(int64, tag = "3")]
+    pub power: i64,
+    #[prost(string, tag = "4")]
+    pub consensus_address: ::prost::alloc::string::String,
+}
 /// MsgSubmitEvidence represents a message that supports submitting arbitrary
 /// Evidence of misbehavior such as equivocation or counterfactual signing.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -238,19 +251,6 @@ pub mod msg_server {
     impl<T: Msg> tonic::server::NamedService for MsgServer<T> {
         const NAME: &'static str = "cosmos.evidence.v1beta1.Msg";
     }
-}
-/// Equivocation implements the Evidence interface and defines evidence of double
-/// signing misbehavior.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Equivocation {
-    #[prost(int64, tag = "1")]
-    pub height: i64,
-    #[prost(message, optional, tag = "2")]
-    pub time: ::core::option::Option<::prost_types::Timestamp>,
-    #[prost(int64, tag = "3")]
-    pub power: i64,
-    #[prost(string, tag = "4")]
-    pub consensus_address: ::prost::alloc::string::String,
 }
 /// QueryEvidenceRequest is the request type for the Query/Evidence RPC method.
 #[derive(Clone, PartialEq, ::prost::Message)]
