@@ -9,6 +9,12 @@ use crate::{cosmos, ibc, traits::TypeUrl};
 #[cfg(feature = "cosmwasm")]
 use crate::cosmwasm;
 
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::InstantiateContractProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.InstantiateContractProposal";
+}
+
 #[cfg(feature = "cosmwasm")]
 impl TypeUrl for cosmwasm::wasm::v1::StoreCodeProposal {
     const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.StoreCodeProposal";
