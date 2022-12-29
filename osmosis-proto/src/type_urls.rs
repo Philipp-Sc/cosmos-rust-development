@@ -14,7 +14,22 @@ impl TypeUrl for osmosis::gamm::v1beta1::Pool {
 impl TypeUrl for osmosis::poolincentives::v1beta1::UpdatePoolIncentivesProposal {
     const TYPE_URL: &'static str = "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
 }
+impl TypeUrl for osmosis::poolincentives::v1beta1::ReplacePoolIncentivesProposal {
+    const TYPE_URL: &'static str = "/osmosis.superfluid.v1beta1.ReplacePoolIncentivesProposal";
+}
 
 impl TypeUrl for osmosis::superfluid::v1beta1::RemoveSuperfluidAssetsProposal {
     const TYPE_URL: &'static str = "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
 }
+
+impl TypeUrl for osmosis::superfluid::v1beta1::SetSuperfluidAssetsProposal {
+    const TYPE_URL: &'static str = "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
+}
+
+impl TypeUrl for osmosis::txfees::v1beta1::UpdateFeeTokenProposal {
+    const TYPE_URL: &'static str = "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
+}
+
+
+
+
