@@ -9,6 +9,45 @@ use crate::{cosmos, ibc, traits::TypeUrl};
 #[cfg(feature = "cosmwasm")]
 use crate::cosmwasm;
 
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::MigrateContractProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.MigrateContractProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::UpdateInstantiateConfigProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.UpdateInstantiateConfigProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::SudoContractProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.SudoContractProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::ExecuteContractProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.ExecuteContractProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::UpdateAdminProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.UpdateAdminProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::ClearAdminProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.ClearAdminProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::PinCodesProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.PinCodesProposal";
+}
+
+#[cfg(feature = "cosmwasm")]
+impl TypeUrl for cosmwasm::wasm::v1::UnpinCodesProposal {
+    const TYPE_URL: &'static str = "/cosmwasm.wasm.v1.UnpinCodesProposal";
+}
 
 #[cfg(feature = "cosmwasm")]
 impl TypeUrl for cosmwasm::wasm::v1::InstantiateContractProposal {
