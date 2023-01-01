@@ -19,8 +19,6 @@ pub struct Params {
     pub code_upload_access: ::core::option::Option<AccessConfig>,
     #[prost(enumeration = "AccessType", tag = "2")]
     pub instantiate_default_permission: i32,
-    #[prost(uint64, tag = "3")]
-    pub max_wasm_code_size: u64,
 }
 /// CodeInfo is data for the uploaded contract WASM code
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -515,7 +513,7 @@ pub struct MigrateContractProposal {
     /// Contract is the address of the smart contract
     #[prost(string, tag = "4")]
     pub contract: ::prost::alloc::string::String,
-    /// CodeID references the new WASM codesudo
+    /// CodeID references the new WASM code
     #[prost(uint64, tag = "5")]
     pub code_id: u64,
     /// Msg json encoded message to be passed to the contract on migration
@@ -618,6 +616,32 @@ pub struct UnpinCodesProposal {
     /// CodeIDs references the WASM codes
     #[prost(uint64, repeated, packed = "false", tag = "3")]
     pub code_ids: ::prost::alloc::vec::Vec<u64>,
+}
+/// AccessConfigUpdate contains the code id and the access config to be
+/// applied.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccessConfigUpdate {
+    /// CodeID is the reference to the stored WASM code to be updated
+    #[prost(uint64, tag = "1")]
+    pub code_id: u64,
+    /// InstantiatePermission to apply to the set of code ids
+    #[prost(message, optional, tag = "2")]
+    pub instantiate_permission: ::core::option::Option<AccessConfig>,
+}
+/// UpdateInstantiateConfigProposal gov proposal content type to update
+/// instantiate config to a  set of code ids.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateInstantiateConfigProposal {
+    /// Title is a short summary
+    #[prost(string, tag = "1")]
+    pub title: ::prost::alloc::string::String,
+    /// Description is a human readable text
+    #[prost(string, tag = "2")]
+    pub description: ::prost::alloc::string::String,
+    /// AccessConfigUpdate contains the list of code ids and the access config
+    /// to be applied.
+    #[prost(message, repeated, tag = "3")]
+    pub access_config_updates: ::prost::alloc::vec::Vec<AccessConfigUpdate>,
 }
 /// MsgIBCSend
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -855,6 +879,8 @@ pub struct CodeInfoResponse {
     pub creator: ::prost::alloc::string::String,
     #[prost(bytes = "vec", tag = "3")]
     pub data_hash: ::prost::alloc::vec::Vec<u8>,
+    #[prost(message, optional, tag = "6")]
+    pub instantiate_permission: ::core::option::Option<AccessConfig>,
 }
 /// QueryCodeResponse is the response type for the Query/Code RPC method
 #[derive(Clone, PartialEq, ::prost::Message)]
