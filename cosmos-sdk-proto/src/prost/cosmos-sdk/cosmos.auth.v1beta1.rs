@@ -40,6 +40,7 @@ pub struct Params {
     pub sig_verify_cost_secp256k1: u64,
 }
 /// GenesisState defines the auth module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     /// params defines all the paramaters of the module.
@@ -431,17 +432,3 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.auth.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState defines the auth module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    /// params defines all the paramaters of the module.
-    #[prost(message, optional, tag = "1")]
-    pub params: ::core::option::Option<Params>,
-    /// accounts are the accounts present at genesis.
-    #[prost(message, repeated, tag = "2")]
-    pub accounts: ::prost::alloc::vec::Vec<::prost_types::Any>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

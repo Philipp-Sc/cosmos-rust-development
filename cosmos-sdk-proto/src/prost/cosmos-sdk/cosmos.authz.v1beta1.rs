@@ -423,6 +423,7 @@ pub mod msg_server {
     }
 }
 /// EventGrant is emitted on Msg/Grant
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventGrant {
     /// Msg type URL for which an autorization is granted
@@ -436,6 +437,7 @@ pub struct EventGrant {
     pub grantee: ::prost::alloc::string::String,
 }
 /// EventRevoke is emitted on Msg/Revoke
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EventRevoke {
     /// Msg type URL for which an autorization is revoked
@@ -449,6 +451,7 @@ pub struct EventRevoke {
     pub grantee: ::prost::alloc::string::String,
 }
 /// GenesisState defines the authz module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     #[prost(message, repeated, tag = "1")]
@@ -863,41 +866,3 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.authz.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
-=======
-/// EventGrant is emitted on Msg/Grant
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EventGrant {
-    /// Msg type URL for which an autorization is granted
-    #[prost(string, tag = "2")]
-    pub msg_type_url: ::prost::alloc::string::String,
-    /// Granter account address
-    #[prost(string, tag = "3")]
-    pub granter: ::prost::alloc::string::String,
-    /// Grantee account address
-    #[prost(string, tag = "4")]
-    pub grantee: ::prost::alloc::string::String,
-}
-/// EventRevoke is emitted on Msg/Revoke
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EventRevoke {
-    /// Msg type URL for which an autorization is revoked
-    #[prost(string, tag = "2")]
-    pub msg_type_url: ::prost::alloc::string::String,
-    /// Granter account address
-    #[prost(string, tag = "3")]
-    pub granter: ::prost::alloc::string::String,
-    /// Grantee account address
-    #[prost(string, tag = "4")]
-    pub grantee: ::prost::alloc::string::String,
-}
-/// GenesisState defines the authz module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    #[prost(message, repeated, tag = "1")]
-    pub authorization: ::prost::alloc::vec::Vec<GrantAuthorization>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

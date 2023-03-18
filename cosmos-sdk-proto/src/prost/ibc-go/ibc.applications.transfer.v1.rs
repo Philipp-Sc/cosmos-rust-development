@@ -1,5 +1,6 @@
 /// DenomTrace contains the base denomination for ICS20 fungible tokens and the
 /// source tracing information path.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DenomTrace {
     /// path defines the chain of port/channel identifiers used for tracing the
@@ -14,6 +15,7 @@ pub struct DenomTrace {
 /// NOTE: To prevent a single token from being transferred, set the
 /// TransfersEnabled parameter to true and then set the bank module's SendEnabled
 /// parameter for the denomination to false.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Params {
     /// send_enabled enables or disables all cross-chain token transfers from this
@@ -147,44 +149,16 @@ pub mod msg_client {
         }
     }
 }
-<<<<<<< HEAD
 /// GenesisState defines the ibc-transfer genesis state
-=======
-/// DenomTrace contains the base denomination for ICS20 fungible tokens and the
-/// source tracing information path.
 #[allow(clippy::derive_partial_eq_without_eq)]
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     #[prost(string, tag = "1")]
-<<<<<<< HEAD
     pub port_id: ::prost::alloc::string::String,
     #[prost(message, repeated, tag = "2")]
     pub denom_traces: ::prost::alloc::vec::Vec<DenomTrace>,
     #[prost(message, optional, tag = "3")]
     pub params: ::core::option::Option<Params>,
-=======
-    pub path: ::prost::alloc::string::String,
-    /// base denomination of the relayed fungible token.
-    #[prost(string, tag = "2")]
-    pub base_denom: ::prost::alloc::string::String,
-}
-/// Params defines the set of IBC transfer parameters.
-/// NOTE: To prevent a single token from being transferred, set the
-/// TransfersEnabled parameter to true and then set the bank module's SendEnabled
-/// parameter for the denomination to false.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Params {
-    /// send_enabled enables or disables all cross-chain token transfers from this
-    /// chain.
-    #[prost(bool, tag = "1")]
-    pub send_enabled: bool,
-    /// receive_enabled enables or disables all cross-chain token transfers to this
-    /// chain.
-    #[prost(bool, tag = "2")]
-    pub receive_enabled: bool,
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 }
 /// QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
 /// method
@@ -401,17 +375,3 @@ pub mod query_client {
         }
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState defines the ibc-transfer genesis state
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    #[prost(string, tag = "1")]
-    pub port_id: ::prost::alloc::string::String,
-    #[prost(message, repeated, tag = "2")]
-    pub denom_traces: ::prost::alloc::vec::Vec<DenomTrace>,
-    #[prost(message, optional, tag = "3")]
-    pub params: ::core::option::Option<Params>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

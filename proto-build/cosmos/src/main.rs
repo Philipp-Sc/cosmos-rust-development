@@ -120,7 +120,7 @@ fn is_github() -> bool {
     env::args().any(|arg| arg == "--github")
 }
 
-fn run_cmd(cmd: impl AsRef<OsStr>, args: impl IntoIterator<Item = impl AsRef<OsStr>>) {
+fn run_cmd(cmd: impl AsRef<OsStr>, args: impl IntoIterator<Item = impl AsRef<OsStr>> ) {
     let stdout = if is_quiet() {
         process::Stdio::null()
     } else {
@@ -270,8 +270,9 @@ fn compile_wasmd_proto_and_services(out_dir: &Path) {
     // Compile all proto client for GRPC services
     info!("Compiling wasmd proto clients for GRPC services!");
     run_cmd(
-        "buf",
+        "npx",
         vec![
+            "buf",
             "generate",
             "--template",
             "buf.wasmd.gen.yaml",

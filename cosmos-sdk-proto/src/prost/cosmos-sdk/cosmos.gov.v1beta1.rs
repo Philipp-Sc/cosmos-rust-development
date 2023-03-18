@@ -662,6 +662,7 @@ pub mod msg_server {
     }
 }
 /// GenesisState defines the gov module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     /// starting_proposal_id is the ID of the starting proposal.
@@ -1432,32 +1433,3 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.gov.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState defines the gov module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    /// starting_proposal_id is the ID of the starting proposal.
-    #[prost(uint64, tag = "1")]
-    pub starting_proposal_id: u64,
-    /// deposits defines all the deposits present at genesis.
-    #[prost(message, repeated, tag = "2")]
-    pub deposits: ::prost::alloc::vec::Vec<Deposit>,
-    /// votes defines all the votes present at genesis.
-    #[prost(message, repeated, tag = "3")]
-    pub votes: ::prost::alloc::vec::Vec<Vote>,
-    /// proposals defines all the proposals present at genesis.
-    #[prost(message, repeated, tag = "4")]
-    pub proposals: ::prost::alloc::vec::Vec<Proposal>,
-    /// params defines all the paramaters of related to deposit.
-    #[prost(message, optional, tag = "5")]
-    pub deposit_params: ::core::option::Option<DepositParams>,
-    /// params defines all the paramaters of related to voting.
-    #[prost(message, optional, tag = "6")]
-    pub voting_params: ::core::option::Option<VotingParams>,
-    /// params defines all the paramaters of related to tally.
-    #[prost(message, optional, tag = "7")]
-    pub tally_params: ::core::option::Option<TallyParams>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

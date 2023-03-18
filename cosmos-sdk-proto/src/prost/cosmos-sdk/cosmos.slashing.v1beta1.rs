@@ -278,6 +278,7 @@ pub struct Params {
     pub slash_fraction_downtime: ::prost::alloc::vec::Vec<u8>,
 }
 /// GenesisState defines the slashing module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     /// params defines all the paramaters of related to deposit.
@@ -293,6 +294,7 @@ pub struct GenesisState {
     pub missed_blocks: ::prost::alloc::vec::Vec<ValidatorMissedBlocks>,
 }
 /// SigningInfo stores validator signing info of corresponding address.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SigningInfo {
     /// address is the validator address.
@@ -304,6 +306,7 @@ pub struct SigningInfo {
 }
 /// ValidatorMissedBlocks contains array of missed blocks of corresponding
 /// address.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatorMissedBlocks {
     /// address is the validator address.
@@ -314,6 +317,7 @@ pub struct ValidatorMissedBlocks {
     pub missed_blocks: ::prost::alloc::vec::Vec<MissedBlock>,
 }
 /// MissedBlock contains height and missed status as boolean.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MissedBlock {
     /// index is the height at which the block was missed.
@@ -701,56 +705,3 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.slashing.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState defines the slashing module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    /// params defines all the paramaters of related to deposit.
-    #[prost(message, optional, tag = "1")]
-    pub params: ::core::option::Option<Params>,
-    /// signing_infos represents a map between validator addresses and their
-    /// signing infos.
-    #[prost(message, repeated, tag = "2")]
-    pub signing_infos: ::prost::alloc::vec::Vec<SigningInfo>,
-    /// missed_blocks represents a map between validator addresses and their
-    /// missed blocks.
-    #[prost(message, repeated, tag = "3")]
-    pub missed_blocks: ::prost::alloc::vec::Vec<ValidatorMissedBlocks>,
-}
-/// SigningInfo stores validator signing info of corresponding address.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SigningInfo {
-    /// address is the validator address.
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
-    /// validator_signing_info represents the signing info of this validator.
-    #[prost(message, optional, tag = "2")]
-    pub validator_signing_info: ::core::option::Option<ValidatorSigningInfo>,
-}
-/// ValidatorMissedBlocks contains array of missed blocks of corresponding
-/// address.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ValidatorMissedBlocks {
-    /// address is the validator address.
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
-    /// missed_blocks is an array of missed blocks by the validator.
-    #[prost(message, repeated, tag = "2")]
-    pub missed_blocks: ::prost::alloc::vec::Vec<MissedBlock>,
-}
-/// MissedBlock contains height and missed status as boolean.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MissedBlock {
-    /// index is the height at which the block was missed.
-    #[prost(int64, tag = "1")]
-    pub index: i64,
-    /// missed is the missed status.
-    #[prost(bool, tag = "2")]
-    pub missed: bool,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

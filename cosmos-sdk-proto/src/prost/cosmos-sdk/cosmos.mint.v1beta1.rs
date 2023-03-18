@@ -33,6 +33,7 @@ pub struct Params {
     pub blocks_per_year: u64,
 }
 /// GenesisState defines the mint module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     /// minter is a space for holding current inflation information.
@@ -411,17 +412,3 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.mint.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState defines the mint module's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    /// minter is a space for holding current inflation information.
-    #[prost(message, optional, tag = "1")]
-    pub minter: ::core::option::Option<Minter>,
-    /// params defines all the paramaters of the module.
-    #[prost(message, optional, tag = "2")]
-    pub params: ::core::option::Option<Params>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

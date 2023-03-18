@@ -403,6 +403,7 @@ pub mod msg_client {
     }
 }
 /// GenesisState defines the ibc connection submodule's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     #[prost(message, repeated, tag = "1")]
@@ -710,20 +711,3 @@ pub mod query_client {
         }
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState defines the ibc connection submodule's genesis state.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    #[prost(message, repeated, tag = "1")]
-    pub connections: ::prost::alloc::vec::Vec<IdentifiedConnection>,
-    #[prost(message, repeated, tag = "2")]
-    pub client_connection_paths: ::prost::alloc::vec::Vec<ConnectionPaths>,
-    /// the sequence for the next generated connection identifier
-    #[prost(uint64, tag = "3")]
-    pub next_connection_sequence: u64,
-    #[prost(message, optional, tag = "4")]
-    pub params: ::core::option::Option<Params>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

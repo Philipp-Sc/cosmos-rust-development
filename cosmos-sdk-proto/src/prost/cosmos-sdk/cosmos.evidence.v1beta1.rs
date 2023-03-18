@@ -241,13 +241,8 @@ pub mod msg_server {
         const NAME: &'static str = "cosmos.evidence.v1beta1.Msg";
     }
 }
-<<<<<<< HEAD
 /// GenesisState defines the evidence module's genesis state.
-=======
-/// Equivocation implements the Evidence interface and defines evidence of double
-/// signing misbehavior.
 #[allow(clippy::derive_partial_eq_without_eq)]
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     /// evidence defines all the evidence at genesis.
@@ -569,13 +564,9 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.evidence.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
 /// Equivocation implements the Evidence interface and defines evidence of double
 /// signing misbehavior.
-=======
-/// GenesisState defines the evidence module's genesis state.
 #[allow(clippy::derive_partial_eq_without_eq)]
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Equivocation {
     #[prost(int64, tag = "1")]

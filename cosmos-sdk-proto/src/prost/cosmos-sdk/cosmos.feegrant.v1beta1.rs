@@ -377,6 +377,7 @@ pub struct Grant {
     pub allowance: ::core::option::Option<::prost_types::Any>,
 }
 /// GenesisState contains a set of fee allowances, persisted from the store
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     #[prost(message, repeated, tag = "1")]
@@ -700,13 +701,3 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.feegrant.v1beta1.Query";
     }
 }
-<<<<<<< HEAD
-=======
-/// GenesisState contains a set of fee allowances, persisted from the store
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    #[prost(message, repeated, tag = "1")]
-    pub allowances: ::prost::alloc::vec::Vec<Grant>,
-}
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

@@ -378,8 +378,6 @@ pub mod genesis_state {
         }
     }
 }
-<<<<<<< HEAD
-=======
 /// Code struct encompasses CodeInfo and CodeBytes
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Code {
@@ -436,7 +434,6 @@ pub struct MsgIbcCloseChannel {
     #[prost(string, tag = "2")]
     pub channel: ::prost::alloc::string::String,
 }
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 /// StoreCodeProposal gov proposal content type to submit WASM code to the system
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoreCodeProposal {
@@ -455,12 +452,9 @@ pub struct StoreCodeProposal {
     /// InstantiatePermission to apply on contract creation, optional
     #[prost(message, optional, tag = "7")]
     pub instantiate_permission: ::core::option::Option<AccessConfig>,
-<<<<<<< HEAD
-=======
     /// UnpinCode code on upload, optional
     #[prost(bool, tag = "8")]
     pub unpin_code: bool,
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 }
 /// InstantiateContractProposal gov proposal content type to instantiate a
 /// contract.
@@ -635,103 +629,6 @@ pub struct UpdateInstantiateConfigProposal {
     #[prost(message, repeated, tag = "3")]
     pub access_config_updates: ::prost::alloc::vec::Vec<AccessConfigUpdate>,
 }
-<<<<<<< HEAD
-/// MsgIBCSend
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MsgIbcSend {
-    /// the channel by which the packet will be sent
-    #[prost(string, tag = "2")]
-    pub channel: ::prost::alloc::string::String,
-    /// Timeout height relative to the current block height.
-    /// The timeout is disabled when set to 0.
-    #[prost(uint64, tag = "4")]
-    pub timeout_height: u64,
-    /// Timeout timestamp (in nanoseconds) relative to the current block timestamp.
-    /// The timeout is disabled when set to 0.
-    #[prost(uint64, tag = "5")]
-    pub timeout_timestamp: u64,
-    /// Data is the payload to transfer. We must not make assumption what format or
-    /// content is in here.
-    #[prost(bytes = "vec", tag = "6")]
-    pub data: ::prost::alloc::vec::Vec<u8>,
-}
-/// MsgIBCCloseChannel port and channel need to be owned by the contract
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct MsgIbcCloseChannel {
-    #[prost(string, tag = "2")]
-    pub channel: ::prost::alloc::string::String,
-}
-/// GenesisState - genesis state of x/wasm
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GenesisState {
-    #[prost(message, optional, tag = "1")]
-    pub params: ::core::option::Option<Params>,
-    #[prost(message, repeated, tag = "2")]
-    pub codes: ::prost::alloc::vec::Vec<Code>,
-    #[prost(message, repeated, tag = "3")]
-    pub contracts: ::prost::alloc::vec::Vec<Contract>,
-    #[prost(message, repeated, tag = "4")]
-    pub sequences: ::prost::alloc::vec::Vec<Sequence>,
-    #[prost(message, repeated, tag = "5")]
-    pub gen_msgs: ::prost::alloc::vec::Vec<genesis_state::GenMsgs>,
-}
-/// Nested message and enum types in `GenesisState`.
-pub mod genesis_state {
-    /// GenMsgs define the messages that can be executed during genesis phase in
-    /// order. The intention is to have more human readable data that is auditable.
-    #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct GenMsgs {
-        /// sum is a single message
-        #[prost(oneof = "gen_msgs::Sum", tags = "1, 2, 3")]
-        pub sum: ::core::option::Option<gen_msgs::Sum>,
-    }
-    /// Nested message and enum types in `GenMsgs`.
-    pub mod gen_msgs {
-        /// sum is a single message
-        #[derive(Clone, PartialEq, ::prost::Oneof)]
-        pub enum Sum {
-            #[prost(message, tag = "1")]
-            StoreCode(super::super::MsgStoreCode),
-            #[prost(message, tag = "2")]
-            InstantiateContract(super::super::MsgInstantiateContract),
-            #[prost(message, tag = "3")]
-            ExecuteContract(super::super::MsgExecuteContract),
-        }
-    }
-}
-/// Code struct encompasses CodeInfo and CodeBytes
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Code {
-    #[prost(uint64, tag = "1")]
-    pub code_id: u64,
-    #[prost(message, optional, tag = "2")]
-    pub code_info: ::core::option::Option<CodeInfo>,
-    #[prost(bytes = "vec", tag = "3")]
-    pub code_bytes: ::prost::alloc::vec::Vec<u8>,
-    /// Pinned to wasmvm cache
-    #[prost(bool, tag = "4")]
-    pub pinned: bool,
-}
-/// Contract struct encompasses ContractAddress, ContractInfo, and ContractState
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Contract {
-    #[prost(string, tag = "1")]
-    pub contract_address: ::prost::alloc::string::String,
-    #[prost(message, optional, tag = "2")]
-    pub contract_info: ::core::option::Option<ContractInfo>,
-    #[prost(message, repeated, tag = "3")]
-    pub contract_state: ::prost::alloc::vec::Vec<Model>,
-}
-/// Sequence key and value of an id generation counter
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Sequence {
-    #[prost(bytes = "vec", tag = "1")]
-    pub id_key: ::prost::alloc::vec::Vec<u8>,
-    #[prost(uint64, tag = "2")]
-    pub value: u64,
-}
-=======
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 /// QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
 /// method
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -923,224 +820,6 @@ pub struct QueryPinnedCodesResponse {
     pub pagination:
         ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageResponse>,
 }
-<<<<<<< HEAD
-/// Generated client implementations.
-#[cfg(feature = "grpc")]
-#[cfg_attr(docsrs, doc(cfg(feature = "grpc")))]
-pub mod query_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
-    use tonic::codegen::*;
-    /// Query provides defines the gRPC querier service
-    #[derive(Debug, Clone)]
-    pub struct QueryClient<T> {
-        inner: tonic::client::Grpc<T>,
-    }
-    #[cfg(feature = "grpc-transport")]
-    #[cfg_attr(docsrs, doc(cfg(feature = "grpc-transport")))]
-    impl QueryClient<tonic::transport::Channel> {
-        /// Attempt to create a new client by connecting to a given endpoint.
-        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
-        where
-            D: std::convert::TryInto<tonic::transport::Endpoint>,
-            D::Error: Into<StdError>,
-        {
-            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
-            Ok(Self::new(conn))
-        }
-    }
-    impl<T> QueryClient<T>
-    where
-        T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
-    {
-        pub fn new(inner: T) -> Self {
-            let inner = tonic::client::Grpc::new(inner);
-            Self { inner }
-        }
-        pub fn with_origin(inner: T, origin: Uri) -> Self {
-            let inner = tonic::client::Grpc::with_origin(inner, origin);
-            Self { inner }
-        }
-        pub fn with_interceptor<F>(
-            inner: T,
-            interceptor: F,
-        ) -> QueryClient<InterceptedService<T, F>>
-        where
-            F: tonic::service::Interceptor,
-            T::ResponseBody: Default,
-            T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
-                >,
-            >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
-        {
-            QueryClient::new(InterceptedService::new(inner, interceptor))
-        }
-        /// Compress requests with the given encoding.
-        ///
-        /// This requires the server to support it otherwise it might respond with an
-        /// error.
-        #[must_use]
-        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.inner = self.inner.send_compressed(encoding);
-            self
-        }
-        /// Enable decompressing responses.
-        #[must_use]
-        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.inner = self.inner.accept_compressed(encoding);
-            self
-        }
-        /// ContractInfo gets the contract meta data
-        pub async fn contract_info(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryContractInfoRequest>,
-        ) -> Result<tonic::Response<super::QueryContractInfoResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/ContractInfo");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// ContractHistory gets the contract code history
-        pub async fn contract_history(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryContractHistoryRequest>,
-        ) -> Result<tonic::Response<super::QueryContractHistoryResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/ContractHistory");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// ContractsByCode lists all smart contracts for a code id
-        pub async fn contracts_by_code(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryContractsByCodeRequest>,
-        ) -> Result<tonic::Response<super::QueryContractsByCodeResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/ContractsByCode");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// AllContractState gets all raw store data for a single contract
-        pub async fn all_contract_state(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryAllContractStateRequest>,
-        ) -> Result<tonic::Response<super::QueryAllContractStateResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/AllContractState");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// RawContractState gets single key from the raw store data of a contract
-        pub async fn raw_contract_state(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryRawContractStateRequest>,
-        ) -> Result<tonic::Response<super::QueryRawContractStateResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/RawContractState");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// SmartContractState get smart query result from the contract
-        pub async fn smart_contract_state(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QuerySmartContractStateRequest>,
-        ) -> Result<tonic::Response<super::QuerySmartContractStateResponse>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/SmartContractState");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// Code gets the binary code and metadata for a singe wasm code
-        pub async fn code(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryCodeRequest>,
-        ) -> Result<tonic::Response<super::QueryCodeResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/Code");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// Codes gets the metadata for all stored wasm codes
-        pub async fn codes(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryCodesRequest>,
-        ) -> Result<tonic::Response<super::QueryCodesResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/Codes");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// PinnedCodes gets the pinned code ids
-        pub async fn pinned_codes(
-            &mut self,
-            request: impl tonic::IntoRequest<super::QueryPinnedCodesRequest>,
-        ) -> Result<tonic::Response<super::QueryPinnedCodesResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Query/PinnedCodes");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-    }
-}
-=======
 /// QueryParamsRequest is the request type for the Query/Params RPC method.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsRequest {}
@@ -1153,4 +832,3 @@ pub struct QueryParamsResponse {
 }
 include!("cosmwasm.wasm.v1.tonic.rs");
 // @@protoc_insertion_point(module)
->>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
