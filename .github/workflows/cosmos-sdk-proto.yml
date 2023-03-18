@@ -5,6 +5,7 @@ on:
     branches: main
   pull_request:
     paths:
+      - ".github/workflows/cosmos-sdk-proto.yml"
       - "cosmos-sdk-proto/**"
       - "Cargo.*"
 
@@ -22,19 +23,16 @@ jobs:
     strategy:
       matrix:
         rust:
-          - 1.59.0 # MSRV
-          - stable
+          - 1.63.0 # MSRV
         target:
           - x86_64-unknown-linux-gnu
           - wasm32-unknown-unknown
     steps:
       - uses: actions/checkout@v1
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: ${{ matrix.rust }}
           target: ${{ matrix.target }}
-          override: true
       - run: cargo build --target ${{ matrix.target }} --release --no-default-features
       - run: cargo build --target ${{ matrix.target }} --release --no-default-features --features grpc
 
@@ -43,13 +41,11 @@ jobs:
     strategy:
       matrix:
         rust:
-          - 1.59.0 # MSRV
+          - 1.63.0 # MSRV
           - stable
     steps:
       - uses: actions/checkout@v1
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@master
         with:
-          profile: minimal
           toolchain: ${{ matrix.rust }}
-          override: true
       - run: cargo test --release

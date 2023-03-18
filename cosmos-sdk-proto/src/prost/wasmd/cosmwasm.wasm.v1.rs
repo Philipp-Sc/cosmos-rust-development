@@ -1,3 +1,4 @@
+// @generated
 /// AccessTypeParam
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessTypeParam {
@@ -9,8 +10,12 @@ pub struct AccessTypeParam {
 pub struct AccessConfig {
     #[prost(enumeration = "AccessType", tag = "1")]
     pub permission: i32,
+    /// Address
+    /// Deprecated: replaced by addresses
     #[prost(string, tag = "2")]
     pub address: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "3")]
+    pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Params defines the set of wasm parameters.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -104,10 +109,13 @@ pub enum AccessType {
     Unspecified = 0,
     /// AccessTypeNobody forbidden
     Nobody = 1,
-    /// AccessTypeOnlyAddress restricted to an address
+    /// AccessTypeOnlyAddress restricted to a single address
+    /// Deprecated: use AccessTypeAnyOfAddresses instead
     OnlyAddress = 2,
     /// AccessTypeEverybody unrestricted
     Everybody = 3,
+    /// AccessTypeAnyOfAddresses allow any of the addresses
+    AnyOfAddresses = 4,
 }
 impl AccessType {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -120,6 +128,7 @@ impl AccessType {
             AccessType::Nobody => "ACCESS_TYPE_NOBODY",
             AccessType::OnlyAddress => "ACCESS_TYPE_ONLY_ADDRESS",
             AccessType::Everybody => "ACCESS_TYPE_EVERYBODY",
+            AccessType::AnyOfAddresses => "ACCESS_TYPE_ANY_OF_ADDRESSES",
         }
     }
 }
@@ -176,6 +185,9 @@ pub struct MsgStoreCodeResponse {
     /// CodeID is the reference to the stored WASM code
     #[prost(uint64, tag = "1")]
     pub code_id: u64,
+    /// Checksum is the sha256 hash of the stored code
+    #[prost(bytes = "vec", tag = "2")]
+    pub checksum: ::prost::alloc::vec::Vec<u8>,
 }
 /// MsgInstantiateContract create a new smart contract instance for the given
 /// code id.
@@ -200,13 +212,53 @@ pub struct MsgInstantiateContract {
     #[prost(message, repeated, tag = "6")]
     pub funds: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
 }
+/// MsgInstantiateContract2 create a new smart contract instance for the given
+/// code id with a predicable address.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MsgInstantiateContract2 {
+    /// Sender is the that actor that signed the messages
+    #[prost(string, tag = "1")]
+    pub sender: ::prost::alloc::string::String,
+    /// Admin is an optional address that can execute migrations
+    #[prost(string, tag = "2")]
+    pub admin: ::prost::alloc::string::String,
+    /// CodeID is the reference to the stored WASM code
+    #[prost(uint64, tag = "3")]
+    pub code_id: u64,
+    /// Label is optional metadata to be stored with a contract instance.
+    #[prost(string, tag = "4")]
+    pub label: ::prost::alloc::string::String,
+    /// Msg json encoded message to be passed to the contract on instantiation
+    #[prost(bytes = "vec", tag = "5")]
+    pub msg: ::prost::alloc::vec::Vec<u8>,
+    /// Funds coins that are transferred to the contract on instantiation
+    #[prost(message, repeated, tag = "6")]
+    pub funds: ::prost::alloc::vec::Vec<super::super::super::cosmos::base::v1beta1::Coin>,
+    /// Salt is an arbitrary value provided by the sender. Size can be 1 to 64.
+    #[prost(bytes = "vec", tag = "7")]
+    pub salt: ::prost::alloc::vec::Vec<u8>,
+    /// FixMsg include the msg value into the hash for the predictable address.
+    /// Default is false
+    #[prost(bool, tag = "8")]
+    pub fix_msg: bool,
+}
 /// MsgInstantiateContractResponse return instantiation result data
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgInstantiateContractResponse {
     /// Address is the bech32 address of the new contract instance.
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
-    /// Data contains base64-encoded bytes to returned from the contract
+    /// Data contains bytes to returned from the contract
+    #[prost(bytes = "vec", tag = "2")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
+}
+/// MsgInstantiateContract2Response return instantiation result data
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MsgInstantiateContract2Response {
+    /// Address is the bech32 address of the new contract instance.
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Data contains bytes to returned from the contract
     #[prost(bytes = "vec", tag = "2")]
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
@@ -229,7 +281,7 @@ pub struct MsgExecuteContract {
 /// MsgExecuteContractResponse returns execution result data.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgExecuteContractResponse {
-    /// Data contains base64-encoded bytes to returned from the contract
+    /// Data contains bytes to returned from the contract
     #[prost(bytes = "vec", tag = "1")]
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
@@ -286,171 +338,105 @@ pub struct MsgClearAdmin {
 /// MsgClearAdminResponse returns empty data
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgClearAdminResponse {}
-/// Generated client implementations.
-#[cfg(feature = "grpc")]
-#[cfg_attr(docsrs, doc(cfg(feature = "grpc")))]
-pub mod msg_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
-    use tonic::codegen::*;
-    /// Msg defines the wasm Msg service.
-    #[derive(Debug, Clone)]
-    pub struct MsgClient<T> {
-        inner: tonic::client::Grpc<T>,
+/// GenesisState - genesis state of x/wasm
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenesisState {
+    #[prost(message, optional, tag = "1")]
+    pub params: ::core::option::Option<Params>,
+    #[prost(message, repeated, tag = "2")]
+    pub codes: ::prost::alloc::vec::Vec<Code>,
+    #[prost(message, repeated, tag = "3")]
+    pub contracts: ::prost::alloc::vec::Vec<Contract>,
+    #[prost(message, repeated, tag = "4")]
+    pub sequences: ::prost::alloc::vec::Vec<Sequence>,
+    #[prost(message, repeated, tag = "5")]
+    pub gen_msgs: ::prost::alloc::vec::Vec<genesis_state::GenMsgs>,
+}
+/// Nested message and enum types in `GenesisState`.
+pub mod genesis_state {
+    /// GenMsgs define the messages that can be executed during genesis phase in
+    /// order. The intention is to have more human readable data that is auditable.
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct GenMsgs {
+        /// sum is a single message
+        #[prost(oneof = "gen_msgs::Sum", tags = "1, 2, 3")]
+        pub sum: ::core::option::Option<gen_msgs::Sum>,
     }
-    #[cfg(feature = "grpc-transport")]
-    #[cfg_attr(docsrs, doc(cfg(feature = "grpc-transport")))]
-    impl MsgClient<tonic::transport::Channel> {
-        /// Attempt to create a new client by connecting to a given endpoint.
-        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
-        where
-            D: std::convert::TryInto<tonic::transport::Endpoint>,
-            D::Error: Into<StdError>,
-        {
-            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
-            Ok(Self::new(conn))
-        }
-    }
-    impl<T> MsgClient<T>
-    where
-        T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
-    {
-        pub fn new(inner: T) -> Self {
-            let inner = tonic::client::Grpc::new(inner);
-            Self { inner }
-        }
-        pub fn with_origin(inner: T, origin: Uri) -> Self {
-            let inner = tonic::client::Grpc::with_origin(inner, origin);
-            Self { inner }
-        }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> MsgClient<InterceptedService<T, F>>
-        where
-            F: tonic::service::Interceptor,
-            T::ResponseBody: Default,
-            T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
-                >,
-            >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
-        {
-            MsgClient::new(InterceptedService::new(inner, interceptor))
-        }
-        /// Compress requests with the given encoding.
-        ///
-        /// This requires the server to support it otherwise it might respond with an
-        /// error.
-        #[must_use]
-        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.inner = self.inner.send_compressed(encoding);
-            self
-        }
-        /// Enable decompressing responses.
-        #[must_use]
-        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
-            self.inner = self.inner.accept_compressed(encoding);
-            self
-        }
-        /// StoreCode to submit Wasm code to the system
-        pub async fn store_code(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MsgStoreCode>,
-        ) -> Result<tonic::Response<super::MsgStoreCodeResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Msg/StoreCode");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        ///  Instantiate creates a new smart contract instance for the given code id.
-        pub async fn instantiate_contract(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MsgInstantiateContract>,
-        ) -> Result<tonic::Response<super::MsgInstantiateContractResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Msg/InstantiateContract");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// Execute submits the given message data to a smart contract
-        pub async fn execute_contract(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MsgExecuteContract>,
-        ) -> Result<tonic::Response<super::MsgExecuteContractResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Msg/ExecuteContract");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// Migrate runs a code upgrade/ downgrade for a smart contract
-        pub async fn migrate_contract(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MsgMigrateContract>,
-        ) -> Result<tonic::Response<super::MsgMigrateContractResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Msg/MigrateContract");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// UpdateAdmin sets a new   admin for a smart contract
-        pub async fn update_admin(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MsgUpdateAdmin>,
-        ) -> Result<tonic::Response<super::MsgUpdateAdminResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Msg/UpdateAdmin");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        /// ClearAdmin removes any admin stored for a smart contract
-        pub async fn clear_admin(
-            &mut self,
-            request: impl tonic::IntoRequest<super::MsgClearAdmin>,
-        ) -> Result<tonic::Response<super::MsgClearAdminResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/cosmwasm.wasm.v1.Msg/ClearAdmin");
-            self.inner.unary(request.into_request(), path, codec).await
+    /// Nested message and enum types in `GenMsgs`.
+    pub mod gen_msgs {
+        /// sum is a single message
+        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        pub enum Sum {
+            #[prost(message, tag = "1")]
+            StoreCode(super::super::MsgStoreCode),
+            #[prost(message, tag = "2")]
+            InstantiateContract(super::super::MsgInstantiateContract),
+            /// MsgInstantiateContract2 intentionally not supported
+            /// see <https://github.com/CosmWasm/wasmd/issues/987>
+            #[prost(message, tag = "3")]
+            ExecuteContract(super::super::MsgExecuteContract),
         }
     }
 }
+<<<<<<< HEAD
+=======
+/// Code struct encompasses CodeInfo and CodeBytes
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Code {
+    #[prost(uint64, tag = "1")]
+    pub code_id: u64,
+    #[prost(message, optional, tag = "2")]
+    pub code_info: ::core::option::Option<CodeInfo>,
+    #[prost(bytes = "vec", tag = "3")]
+    pub code_bytes: ::prost::alloc::vec::Vec<u8>,
+    /// Pinned to wasmvm cache
+    #[prost(bool, tag = "4")]
+    pub pinned: bool,
+}
+/// Contract struct encompasses ContractAddress, ContractInfo, and ContractState
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Contract {
+    #[prost(string, tag = "1")]
+    pub contract_address: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub contract_info: ::core::option::Option<ContractInfo>,
+    #[prost(message, repeated, tag = "3")]
+    pub contract_state: ::prost::alloc::vec::Vec<Model>,
+}
+/// Sequence key and value of an id generation counter
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Sequence {
+    #[prost(bytes = "vec", tag = "1")]
+    pub id_key: ::prost::alloc::vec::Vec<u8>,
+    #[prost(uint64, tag = "2")]
+    pub value: u64,
+}
+/// MsgIBCSend
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MsgIbcSend {
+    /// the channel by which the packet will be sent
+    #[prost(string, tag = "2")]
+    pub channel: ::prost::alloc::string::String,
+    /// Timeout height relative to the current block height.
+    /// The timeout is disabled when set to 0.
+    #[prost(uint64, tag = "4")]
+    pub timeout_height: u64,
+    /// Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+    /// The timeout is disabled when set to 0.
+    #[prost(uint64, tag = "5")]
+    pub timeout_timestamp: u64,
+    /// Data is the payload to transfer. We must not make assumption what format or
+    /// content is in here.
+    #[prost(bytes = "vec", tag = "6")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
+}
+/// MsgIBCCloseChannel port and channel need to be owned by the contract
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MsgIbcCloseChannel {
+    #[prost(string, tag = "2")]
+    pub channel: ::prost::alloc::string::String,
+}
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 /// StoreCodeProposal gov proposal content type to submit WASM code to the system
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoreCodeProposal {
@@ -469,6 +455,12 @@ pub struct StoreCodeProposal {
     /// InstantiatePermission to apply on contract creation, optional
     #[prost(message, optional, tag = "7")]
     pub instantiate_permission: ::core::option::Option<AccessConfig>,
+<<<<<<< HEAD
+=======
+    /// UnpinCode code on upload, optional
+    #[prost(bool, tag = "8")]
+    pub unpin_code: bool,
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 }
 /// InstantiateContractProposal gov proposal content type to instantiate a
 /// contract.
@@ -643,6 +635,7 @@ pub struct UpdateInstantiateConfigProposal {
     #[prost(message, repeated, tag = "3")]
     pub access_config_updates: ::prost::alloc::vec::Vec<AccessConfigUpdate>,
 }
+<<<<<<< HEAD
 /// MsgIBCSend
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgIbcSend {
@@ -737,6 +730,8 @@ pub struct Sequence {
     #[prost(uint64, tag = "2")]
     pub value: u64,
 }
+=======
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 /// QueryContractInfoRequest is the request type for the Query/ContractInfo RPC
 /// method
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -928,6 +923,7 @@ pub struct QueryPinnedCodesResponse {
     pub pagination:
         ::core::option::Option<super::super::super::cosmos::base::query::v1beta1::PageResponse>,
 }
+<<<<<<< HEAD
 /// Generated client implementations.
 #[cfg(feature = "grpc")]
 #[cfg_attr(docsrs, doc(cfg(feature = "grpc")))]
@@ -1144,3 +1140,17 @@ pub mod query_client {
         }
     }
 }
+=======
+/// QueryParamsRequest is the request type for the Query/Params RPC method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct QueryParamsRequest {}
+/// QueryParamsResponse is the response type for the Query/Params RPC method.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct QueryParamsResponse {
+    /// params defines the parameters of the module.
+    #[prost(message, optional, tag = "1")]
+    pub params: ::core::option::Option<Params>,
+}
+include!("cosmwasm.wasm.v1.tonic.rs");
+// @@protoc_insertion_point(module)
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

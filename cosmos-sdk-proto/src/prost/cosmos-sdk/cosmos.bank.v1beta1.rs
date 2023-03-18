@@ -8,6 +8,7 @@ pub struct SendAuthorization {
     pub spend_limit: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
 }
 /// Params defines the parameters for the bank module.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Params {
     #[prost(message, repeated, tag = "1")]
@@ -17,6 +18,7 @@ pub struct Params {
 }
 /// SendEnabled maps coin denom to a send_enabled status (whether a denom is
 /// sendable).
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEnabled {
     #[prost(string, tag = "1")]
@@ -25,6 +27,7 @@ pub struct SendEnabled {
     pub enabled: bool,
 }
 /// Input models transaction input.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Input {
     #[prost(string, tag = "1")]
@@ -33,6 +36,7 @@ pub struct Input {
     pub coins: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
 }
 /// Output models transaction outputs.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Output {
     #[prost(string, tag = "1")]
@@ -43,6 +47,7 @@ pub struct Output {
 /// Supply represents a struct that passively keeps track of the total supply
 /// amounts in the network.
 /// This message is deprecated now that supply is indexed by denom.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Supply {
     #[prost(message, repeated, tag = "1")]
@@ -50,6 +55,7 @@ pub struct Supply {
 }
 /// DenomUnit represents a struct that describes a given
 /// denomination unit of the basic token.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DenomUnit {
     /// denom represents the string name of the given denom unit (e.g uatom).
@@ -68,6 +74,7 @@ pub struct DenomUnit {
 }
 /// Metadata represents a struct that describes
 /// a basic token.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Metadata {
     #[prost(string, tag = "1")]
@@ -95,6 +102,7 @@ pub struct Metadata {
     pub symbol: ::prost::alloc::string::String,
 }
 /// MsgSend represents a message to send coins from one account to another.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgSend {
     #[prost(string, tag = "1")]
@@ -105,9 +113,11 @@ pub struct MsgSend {
     pub amount: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
 }
 /// MsgSendResponse defines the Msg/Send response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgSendResponse {}
 /// MsgMultiSend represents an arbitrary multi-in, multi-out send message.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgMultiSend {
     #[prost(message, repeated, tag = "1")]
@@ -116,6 +126,7 @@ pub struct MsgMultiSend {
     pub outputs: ::prost::alloc::vec::Vec<Output>,
 }
 /// MsgMultiSendResponse defines the Msg/MultiSend response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgMultiSendResponse {}
 /// Generated client implementations.
@@ -226,7 +237,7 @@ pub mod msg_client {
 pub mod msg_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with MsgServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with MsgServer.
     #[async_trait]
     pub trait Msg: Send + Sync + 'static {
         /// Send defines a method for sending coins from one account to another account.
@@ -420,6 +431,7 @@ pub struct Balance {
     pub coins: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
 }
 /// QueryBalanceRequest is the request type for the Query/Balance RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryBalanceRequest {
     /// address is the address to query balances for.
@@ -430,6 +442,7 @@ pub struct QueryBalanceRequest {
     pub denom: ::prost::alloc::string::String,
 }
 /// QueryBalanceResponse is the response type for the Query/Balance RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryBalanceResponse {
     /// balance is the balance of the coin.
@@ -437,6 +450,7 @@ pub struct QueryBalanceResponse {
     pub balance: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// QueryBalanceRequest is the request type for the Query/AllBalances RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryAllBalancesRequest {
     /// address is the address to query balances for.
@@ -448,6 +462,7 @@ pub struct QueryAllBalancesRequest {
 }
 /// QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryAllBalancesResponse {
     /// balances is the balances of all the coins.
@@ -459,6 +474,7 @@ pub struct QueryAllBalancesResponse {
 }
 /// QuerySpendableBalancesRequest defines the gRPC request structure for querying
 /// an account's spendable balances.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySpendableBalancesRequest {
     /// address is the address to query spendable balances for.
@@ -470,6 +486,7 @@ pub struct QuerySpendableBalancesRequest {
 }
 /// QuerySpendableBalancesResponse defines the gRPC response structure for querying
 /// an account's spendable balances.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySpendableBalancesResponse {
     /// balances is the spendable balances of all the coins.
@@ -481,6 +498,7 @@ pub struct QuerySpendableBalancesResponse {
 }
 /// QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryTotalSupplyRequest {
     /// pagination defines an optional pagination for the request.
@@ -491,6 +509,7 @@ pub struct QueryTotalSupplyRequest {
 }
 /// QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
 /// method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryTotalSupplyResponse {
     /// supply is the supply of the coins
@@ -503,6 +522,7 @@ pub struct QueryTotalSupplyResponse {
     pub pagination: ::core::option::Option<super::super::base::query::v1beta1::PageResponse>,
 }
 /// QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySupplyOfRequest {
     /// denom is the coin denom to query balances for.
@@ -510,6 +530,7 @@ pub struct QuerySupplyOfRequest {
     pub denom: ::prost::alloc::string::String,
 }
 /// QuerySupplyOfResponse is the response type for the Query/SupplyOf RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySupplyOfResponse {
     /// amount is the supply of the coin.
@@ -517,15 +538,18 @@ pub struct QuerySupplyOfResponse {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// QueryParamsRequest defines the request type for querying x/bank parameters.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsRequest {}
 /// QueryParamsResponse defines the response type for querying x/bank parameters.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsResponse {
     #[prost(message, optional, tag = "1")]
     pub params: ::core::option::Option<Params>,
 }
 /// QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDenomsMetadataRequest {
     /// pagination defines an optional pagination for the request.
@@ -534,6 +558,7 @@ pub struct QueryDenomsMetadataRequest {
 }
 /// QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDenomsMetadataResponse {
     /// metadata provides the client information for all the registered tokens.
@@ -544,6 +569,7 @@ pub struct QueryDenomsMetadataResponse {
     pub pagination: ::core::option::Option<super::super::base::query::v1beta1::PageResponse>,
 }
 /// QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDenomMetadataRequest {
     /// denom is the coin denom to query the metadata for.
@@ -552,6 +578,7 @@ pub struct QueryDenomMetadataRequest {
 }
 /// QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDenomMetadataResponse {
     /// metadata describes and provides all the client information for the requested token.
@@ -766,7 +793,7 @@ pub mod query_client {
 pub mod query_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with QueryServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QueryServer.
     #[async_trait]
     pub trait Query: Send + Sync + 'static {
         /// Balance queries the balance of a single coin for a single account.
@@ -1154,3 +1181,46 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.bank.v1beta1.Query";
     }
 }
+<<<<<<< HEAD
+=======
+/// SendAuthorization allows the grantee to spend up to spend_limit coins from
+/// the granter's account.
+///
+/// Since: cosmos-sdk 0.43
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SendAuthorization {
+    #[prost(message, repeated, tag = "1")]
+    pub spend_limit: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
+}
+/// GenesisState defines the bank module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenesisState {
+    /// params defines all the paramaters of the module.
+    #[prost(message, optional, tag = "1")]
+    pub params: ::core::option::Option<Params>,
+    /// balances is an array containing the balances of all the accounts.
+    #[prost(message, repeated, tag = "2")]
+    pub balances: ::prost::alloc::vec::Vec<Balance>,
+    /// supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
+    /// balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
+    #[prost(message, repeated, tag = "3")]
+    pub supply: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
+    /// denom_metadata defines the metadata of the differents coins.
+    #[prost(message, repeated, tag = "4")]
+    pub denom_metadata: ::prost::alloc::vec::Vec<Metadata>,
+}
+/// Balance defines an account address and balance pair used in the bank module's
+/// genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Balance {
+    /// address is the address of the balance holder.
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// coins defines the different coins this balance holds.
+    #[prost(message, repeated, tag = "2")]
+    pub coins: ::prost::alloc::vec::Vec<super::super::base::v1beta1::Coin>,
+}
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

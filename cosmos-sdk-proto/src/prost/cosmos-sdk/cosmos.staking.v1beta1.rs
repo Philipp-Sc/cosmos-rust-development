@@ -67,6 +67,7 @@ impl AuthorizationType {
 /// It is stored as part of staking module's state, which persists the `n` most
 /// recent HistoricalInfo
 /// (`n` is set by the staking module's `historical_entries` parameter).
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HistoricalInfo {
     #[prost(message, optional, tag = "1")]
@@ -76,6 +77,7 @@ pub struct HistoricalInfo {
 }
 /// CommissionRates defines the initial commission rates to be used for creating
 /// a validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommissionRates {
     /// rate is the commission rate charged to delegators, as a fraction.
@@ -89,6 +91,7 @@ pub struct CommissionRates {
     pub max_change_rate: ::prost::alloc::string::String,
 }
 /// Commission defines commission parameters for a given validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Commission {
     /// commission_rates defines the initial commission rates to be used for creating a validator.
@@ -99,6 +102,7 @@ pub struct Commission {
     pub update_time: ::core::option::Option<::prost_types::Timestamp>,
 }
 /// Description defines a validator description.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Description {
     /// moniker defines a human-readable name for the validator.
@@ -125,6 +129,7 @@ pub struct Description {
 /// bond shares is based on the amount of coins delegated divided by the current
 /// exchange rate. Voting power can be calculated as total bonded shares
 /// multiplied by exchange rate.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Validator {
     /// operator_address defines the address of the validator's operator; bech encoded in JSON.
@@ -162,6 +167,7 @@ pub struct Validator {
     pub min_self_delegation: ::prost::alloc::string::String,
 }
 /// ValAddresses defines a repeated set of validator addresses.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValAddresses {
     #[prost(string, repeated, tag = "1")]
@@ -170,6 +176,7 @@ pub struct ValAddresses {
 /// DVPair is struct that just has a delegator-validator pair with no other data.
 /// It is intended to be used as a marshalable pointer. For example, a DVPair can
 /// be used to construct the key to getting an UnbondingDelegation from state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DvPair {
     #[prost(string, tag = "1")]
@@ -178,6 +185,7 @@ pub struct DvPair {
     pub validator_address: ::prost::alloc::string::String,
 }
 /// DVPairs defines an array of DVPair objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DvPairs {
     #[prost(message, repeated, tag = "1")]
@@ -187,6 +195,7 @@ pub struct DvPairs {
 /// with no other data. It is intended to be used as a marshalable pointer. For
 /// example, a DVVTriplet can be used to construct the key to getting a
 /// Redelegation from state.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DvvTriplet {
     #[prost(string, tag = "1")]
@@ -197,6 +206,7 @@ pub struct DvvTriplet {
     pub validator_dst_address: ::prost::alloc::string::String,
 }
 /// DVVTriplets defines an array of DVVTriplet objects.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DvvTriplets {
     #[prost(message, repeated, tag = "1")]
@@ -205,6 +215,7 @@ pub struct DvvTriplets {
 /// Delegation represents the bond with tokens held by an account. It is
 /// owned by one delegator, and is associated with the voting power of one
 /// validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Delegation {
     /// delegator_address is the bech32-encoded address of the delegator.
@@ -219,6 +230,7 @@ pub struct Delegation {
 }
 /// UnbondingDelegation stores all of a single delegator's unbonding bonds
 /// for a single validator in an time-ordered list.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnbondingDelegation {
     /// delegator_address is the bech32-encoded address of the delegator.
@@ -234,6 +246,7 @@ pub struct UnbondingDelegation {
     pub entries: ::prost::alloc::vec::Vec<UnbondingDelegationEntry>,
 }
 /// UnbondingDelegationEntry defines an unbonding object with relevant metadata.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnbondingDelegationEntry {
     /// creation_height is the height which the unbonding took place.
@@ -250,6 +263,7 @@ pub struct UnbondingDelegationEntry {
     pub balance: ::prost::alloc::string::String,
 }
 /// RedelegationEntry defines a redelegation object with relevant metadata.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RedelegationEntry {
     /// creation_height  defines the height which the redelegation took place.
@@ -267,6 +281,7 @@ pub struct RedelegationEntry {
 }
 /// Redelegation contains the list of a particular delegator's redelegating bonds
 /// from a particular source validator to a particular destination validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Redelegation {
     /// delegator_address is the bech32-encoded address of the delegator.
@@ -285,6 +300,7 @@ pub struct Redelegation {
     pub entries: ::prost::alloc::vec::Vec<RedelegationEntry>,
 }
 /// Params defines the parameters for the staking module.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Params {
     /// unbonding_time is the time duration of unbonding.
@@ -305,6 +321,7 @@ pub struct Params {
 }
 /// DelegationResponse is equivalent to Delegation except that it contains a
 /// balance in addition to shares which is more suitable for client responses.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DelegationResponse {
     #[prost(message, optional, tag = "1")]
@@ -315,6 +332,7 @@ pub struct DelegationResponse {
 /// RedelegationEntryResponse is equivalent to a RedelegationEntry except that it
 /// contains a balance in addition to shares which is more suitable for client
 /// responses.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RedelegationEntryResponse {
     #[prost(message, optional, tag = "1")]
@@ -325,6 +343,7 @@ pub struct RedelegationEntryResponse {
 /// RedelegationResponse is equivalent to a Redelegation except that its entries
 /// contain a balance in addition to shares which is more suitable for client
 /// responses.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RedelegationResponse {
     #[prost(message, optional, tag = "1")]
@@ -334,6 +353,7 @@ pub struct RedelegationResponse {
 }
 /// Pool is used for tracking bonded and not-bonded token supply of the bond
 /// denomination.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Pool {
     #[prost(string, tag = "1")]
@@ -367,8 +387,19 @@ impl BondStatus {
             BondStatus::Bonded => "BOND_STATUS_BONDED",
         }
     }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BOND_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "BOND_STATUS_UNBONDED" => Some(Self::Unbonded),
+            "BOND_STATUS_UNBONDING" => Some(Self::Unbonding),
+            "BOND_STATUS_BONDED" => Some(Self::Bonded),
+            _ => None,
+        }
+    }
 }
 /// MsgCreateValidator defines a SDK message for creating a new validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgCreateValidator {
     #[prost(message, optional, tag = "1")]
@@ -387,9 +418,11 @@ pub struct MsgCreateValidator {
     pub value: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgCreateValidatorResponse defines the Msg/CreateValidator response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgCreateValidatorResponse {}
 /// MsgEditValidator defines a SDK message for editing an existing validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgEditValidator {
     #[prost(message, optional, tag = "1")]
@@ -406,10 +439,12 @@ pub struct MsgEditValidator {
     pub min_self_delegation: ::prost::alloc::string::String,
 }
 /// MsgEditValidatorResponse defines the Msg/EditValidator response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgEditValidatorResponse {}
 /// MsgDelegate defines a SDK message for performing a delegation of coins
 /// from a delegator to a validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgDelegate {
     #[prost(string, tag = "1")]
@@ -420,10 +455,12 @@ pub struct MsgDelegate {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgDelegateResponse defines the Msg/Delegate response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgDelegateResponse {}
 /// MsgBeginRedelegate defines a SDK message for performing a redelegation
 /// of coins from a delegator and source validator to a destination validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgBeginRedelegate {
     #[prost(string, tag = "1")]
@@ -436,6 +473,7 @@ pub struct MsgBeginRedelegate {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgBeginRedelegateResponse {
     #[prost(message, optional, tag = "1")]
@@ -443,6 +481,7 @@ pub struct MsgBeginRedelegateResponse {
 }
 /// MsgUndelegate defines a SDK message for performing an undelegation from a
 /// delegate and a validator.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgUndelegate {
     #[prost(string, tag = "1")]
@@ -453,6 +492,7 @@ pub struct MsgUndelegate {
     pub amount: ::core::option::Option<super::super::base::v1beta1::Coin>,
 }
 /// MsgUndelegateResponse defines the Msg/Undelegate response type.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgUndelegateResponse {
     #[prost(message, optional, tag = "1")]
@@ -618,7 +658,7 @@ pub mod msg_client {
 pub mod msg_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with MsgServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with MsgServer.
     #[async_trait]
     pub trait Msg: Send + Sync + 'static {
         /// CreateValidator defines a method for creating a new validator.
@@ -934,6 +974,7 @@ pub struct LastValidatorPower {
     pub power: i64,
 }
 /// QueryValidatorsRequest is request type for Query/Validators RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorsRequest {
     /// status enables to query for validators matching a given status.
@@ -944,6 +985,7 @@ pub struct QueryValidatorsRequest {
     pub pagination: ::core::option::Option<super::super::base::query::v1beta1::PageRequest>,
 }
 /// QueryValidatorsResponse is response type for the Query/Validators RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorsResponse {
     /// validators contains all the queried validators.
@@ -954,6 +996,7 @@ pub struct QueryValidatorsResponse {
     pub pagination: ::core::option::Option<super::super::base::query::v1beta1::PageResponse>,
 }
 /// QueryValidatorRequest is response type for the Query/Validator RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorRequest {
     /// validator_addr defines the validator address to query for.
@@ -961,6 +1004,7 @@ pub struct QueryValidatorRequest {
     pub validator_addr: ::prost::alloc::string::String,
 }
 /// QueryValidatorResponse is response type for the Query/Validator RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorResponse {
     /// validator defines the the validator info.
@@ -969,6 +1013,7 @@ pub struct QueryValidatorResponse {
 }
 /// QueryValidatorDelegationsRequest is request type for the
 /// Query/ValidatorDelegations RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorDelegationsRequest {
     /// validator_addr defines the validator address to query for.
@@ -980,6 +1025,7 @@ pub struct QueryValidatorDelegationsRequest {
 }
 /// QueryValidatorDelegationsResponse is response type for the
 /// Query/ValidatorDelegations RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorDelegationsResponse {
     #[prost(message, repeated, tag = "1")]
@@ -990,6 +1036,7 @@ pub struct QueryValidatorDelegationsResponse {
 }
 /// QueryValidatorUnbondingDelegationsRequest is required type for the
 /// Query/ValidatorUnbondingDelegations RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorUnbondingDelegationsRequest {
     /// validator_addr defines the validator address to query for.
@@ -1001,6 +1048,7 @@ pub struct QueryValidatorUnbondingDelegationsRequest {
 }
 /// QueryValidatorUnbondingDelegationsResponse is response type for the
 /// Query/ValidatorUnbondingDelegations RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryValidatorUnbondingDelegationsResponse {
     #[prost(message, repeated, tag = "1")]
@@ -1010,6 +1058,7 @@ pub struct QueryValidatorUnbondingDelegationsResponse {
     pub pagination: ::core::option::Option<super::super::base::query::v1beta1::PageResponse>,
 }
 /// QueryDelegationRequest is request type for the Query/Delegation RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegationRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1020,6 +1069,7 @@ pub struct QueryDelegationRequest {
     pub validator_addr: ::prost::alloc::string::String,
 }
 /// QueryDelegationResponse is response type for the Query/Delegation RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegationResponse {
     /// delegation_responses defines the delegation info of a delegation.
@@ -1028,6 +1078,7 @@ pub struct QueryDelegationResponse {
 }
 /// QueryUnbondingDelegationRequest is request type for the
 /// Query/UnbondingDelegation RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryUnbondingDelegationRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1039,6 +1090,7 @@ pub struct QueryUnbondingDelegationRequest {
 }
 /// QueryDelegationResponse is response type for the Query/UnbondingDelegation
 /// RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryUnbondingDelegationResponse {
     /// unbond defines the unbonding information of a delegation.
@@ -1047,6 +1099,7 @@ pub struct QueryUnbondingDelegationResponse {
 }
 /// QueryDelegatorDelegationsRequest is request type for the
 /// Query/DelegatorDelegations RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorDelegationsRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1058,6 +1111,7 @@ pub struct QueryDelegatorDelegationsRequest {
 }
 /// QueryDelegatorDelegationsResponse is response type for the
 /// Query/DelegatorDelegations RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorDelegationsResponse {
     /// delegation_responses defines all the delegations' info of a delegator.
@@ -1069,6 +1123,7 @@ pub struct QueryDelegatorDelegationsResponse {
 }
 /// QueryDelegatorUnbondingDelegationsRequest is request type for the
 /// Query/DelegatorUnbondingDelegations RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorUnbondingDelegationsRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1080,6 +1135,7 @@ pub struct QueryDelegatorUnbondingDelegationsRequest {
 }
 /// QueryUnbondingDelegatorDelegationsResponse is response type for the
 /// Query/UnbondingDelegatorDelegations RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorUnbondingDelegationsResponse {
     #[prost(message, repeated, tag = "1")]
@@ -1090,6 +1146,7 @@ pub struct QueryDelegatorUnbondingDelegationsResponse {
 }
 /// QueryRedelegationsRequest is request type for the Query/Redelegations RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryRedelegationsRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1107,6 +1164,7 @@ pub struct QueryRedelegationsRequest {
 }
 /// QueryRedelegationsResponse is response type for the Query/Redelegations RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryRedelegationsResponse {
     #[prost(message, repeated, tag = "1")]
@@ -1117,6 +1175,7 @@ pub struct QueryRedelegationsResponse {
 }
 /// QueryDelegatorValidatorsRequest is request type for the
 /// Query/DelegatorValidators RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorValidatorsRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1128,6 +1187,7 @@ pub struct QueryDelegatorValidatorsRequest {
 }
 /// QueryDelegatorValidatorsResponse is response type for the
 /// Query/DelegatorValidators RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorValidatorsResponse {
     /// validators defines the the validators' info of a delegator.
@@ -1139,6 +1199,7 @@ pub struct QueryDelegatorValidatorsResponse {
 }
 /// QueryDelegatorValidatorRequest is request type for the
 /// Query/DelegatorValidator RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorValidatorRequest {
     /// delegator_addr defines the delegator address to query for.
@@ -1150,6 +1211,7 @@ pub struct QueryDelegatorValidatorRequest {
 }
 /// QueryDelegatorValidatorResponse response type for the
 /// Query/DelegatorValidator RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryDelegatorValidatorResponse {
     /// validator defines the the validator info.
@@ -1158,6 +1220,7 @@ pub struct QueryDelegatorValidatorResponse {
 }
 /// QueryHistoricalInfoRequest is request type for the Query/HistoricalInfo RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryHistoricalInfoRequest {
     /// height defines at which height to query the historical info.
@@ -1166,6 +1229,7 @@ pub struct QueryHistoricalInfoRequest {
 }
 /// QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
 /// method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryHistoricalInfoResponse {
     /// hist defines the historical info at the given height.
@@ -1173,9 +1237,11 @@ pub struct QueryHistoricalInfoResponse {
     pub hist: ::core::option::Option<HistoricalInfo>,
 }
 /// QueryPoolRequest is request type for the Query/Pool RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryPoolRequest {}
 /// QueryPoolResponse is response type for the Query/Pool RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryPoolResponse {
     /// pool defines the pool info.
@@ -1183,9 +1249,11 @@ pub struct QueryPoolResponse {
     pub pool: ::core::option::Option<Pool>,
 }
 /// QueryParamsRequest is request type for the Query/Params RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsRequest {}
 /// QueryParamsResponse is response type for the Query/Params RPC method.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsResponse {
     /// params holds all the parameters of this module.
@@ -1514,7 +1582,7 @@ pub mod query_client {
 pub mod query_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with QueryServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QueryServer.
     #[async_trait]
     pub trait Query: Send + Sync + 'static {
         /// Validators queries all validators that match the given status.
@@ -2150,3 +2218,125 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.staking.v1beta1.Query";
     }
 }
+<<<<<<< HEAD
+=======
+/// StakeAuthorization defines authorization for delegate/undelegate/redelegate.
+///
+/// Since: cosmos-sdk 0.43
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StakeAuthorization {
+    /// max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
+    /// empty, there is no spend limit and any amount of coins can be delegated.
+    #[prost(message, optional, tag = "1")]
+    pub max_tokens: ::core::option::Option<super::super::base::v1beta1::Coin>,
+    /// authorization_type defines one of AuthorizationType.
+    #[prost(enumeration = "AuthorizationType", tag = "4")]
+    pub authorization_type: i32,
+    /// validators is the oneof that represents either allow_list or deny_list
+    #[prost(oneof = "stake_authorization::Policy", tags = "2, 3")]
+    pub validators: ::core::option::Option<stake_authorization::Policy>,
+}
+/// Nested message and enum types in `StakeAuthorization`.
+pub mod stake_authorization {
+    /// Validators defines list of validator addresses.
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Validators {
+        #[prost(string, repeated, tag = "1")]
+        pub address: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    }
+    /// validators is the oneof that represents either allow_list or deny_list
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Policy {
+        /// allow_list specifies list of validator addresses to whom grantee can delegate tokens on behalf of granter's
+        /// account.
+        #[prost(message, tag = "2")]
+        AllowList(Validators),
+        /// deny_list specifies list of validator addresses to whom grantee can not delegate tokens.
+        #[prost(message, tag = "3")]
+        DenyList(Validators),
+    }
+}
+/// AuthorizationType defines the type of staking module authorization type
+///
+/// Since: cosmos-sdk 0.43
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum AuthorizationType {
+    /// AUTHORIZATION_TYPE_UNSPECIFIED specifies an unknown authorization type
+    Unspecified = 0,
+    /// AUTHORIZATION_TYPE_DELEGATE defines an authorization type for Msg/Delegate
+    Delegate = 1,
+    /// AUTHORIZATION_TYPE_UNDELEGATE defines an authorization type for Msg/Undelegate
+    Undelegate = 2,
+    /// AUTHORIZATION_TYPE_REDELEGATE defines an authorization type for Msg/BeginRedelegate
+    Redelegate = 3,
+}
+impl AuthorizationType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AuthorizationType::Unspecified => "AUTHORIZATION_TYPE_UNSPECIFIED",
+            AuthorizationType::Delegate => "AUTHORIZATION_TYPE_DELEGATE",
+            AuthorizationType::Undelegate => "AUTHORIZATION_TYPE_UNDELEGATE",
+            AuthorizationType::Redelegate => "AUTHORIZATION_TYPE_REDELEGATE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "AUTHORIZATION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "AUTHORIZATION_TYPE_DELEGATE" => Some(Self::Delegate),
+            "AUTHORIZATION_TYPE_UNDELEGATE" => Some(Self::Undelegate),
+            "AUTHORIZATION_TYPE_REDELEGATE" => Some(Self::Redelegate),
+            _ => None,
+        }
+    }
+}
+/// GenesisState defines the staking module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenesisState {
+    /// params defines all the paramaters of related to deposit.
+    #[prost(message, optional, tag = "1")]
+    pub params: ::core::option::Option<Params>,
+    /// last_total_power tracks the total amounts of bonded tokens recorded during
+    /// the previous end block.
+    #[prost(bytes = "vec", tag = "2")]
+    pub last_total_power: ::prost::alloc::vec::Vec<u8>,
+    /// last_validator_powers is a special index that provides a historical list
+    /// of the last-block's bonded validators.
+    #[prost(message, repeated, tag = "3")]
+    pub last_validator_powers: ::prost::alloc::vec::Vec<LastValidatorPower>,
+    /// delegations defines the validator set at genesis.
+    #[prost(message, repeated, tag = "4")]
+    pub validators: ::prost::alloc::vec::Vec<Validator>,
+    /// delegations defines the delegations active at genesis.
+    #[prost(message, repeated, tag = "5")]
+    pub delegations: ::prost::alloc::vec::Vec<Delegation>,
+    /// unbonding_delegations defines the unbonding delegations active at genesis.
+    #[prost(message, repeated, tag = "6")]
+    pub unbonding_delegations: ::prost::alloc::vec::Vec<UnbondingDelegation>,
+    /// redelegations defines the redelegations active at genesis.
+    #[prost(message, repeated, tag = "7")]
+    pub redelegations: ::prost::alloc::vec::Vec<Redelegation>,
+    #[prost(bool, tag = "8")]
+    pub exported: bool,
+}
+/// LastValidatorPower required for validator set update logic.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LastValidatorPower {
+    /// address is the address of the validator.
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// power defines the power of the validator.
+    #[prost(int64, tag = "2")]
+    pub power: i64,
+}
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

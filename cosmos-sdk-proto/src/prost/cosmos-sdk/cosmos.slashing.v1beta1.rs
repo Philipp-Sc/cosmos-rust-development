@@ -1,10 +1,12 @@
 /// MsgUnjail defines the Msg/Unjail request type
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgUnjail {
     #[prost(string, tag = "1")]
     pub validator_addr: ::prost::alloc::string::String,
 }
 /// MsgUnjailResponse defines the Msg/Unjail response type
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MsgUnjailResponse {}
 /// Generated client implementations.
@@ -102,7 +104,7 @@ pub mod msg_client {
 pub mod msg_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with MsgServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with MsgServer.
     #[async_trait]
     pub trait Msg: Send + Sync + 'static {
         /// Unjail defines a method for unjailing a jailed validator, thus returning
@@ -235,6 +237,7 @@ pub mod msg_server {
 }
 /// ValidatorSigningInfo defines a validator's signing info for monitoring their
 /// liveness activity.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValidatorSigningInfo {
     #[prost(string, tag = "1")]
@@ -260,6 +263,7 @@ pub struct ValidatorSigningInfo {
     pub missed_blocks_counter: i64,
 }
 /// Params represents the parameters used for by the slashing module.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Params {
     #[prost(int64, tag = "1")]
@@ -320,9 +324,11 @@ pub struct MissedBlock {
     pub missed: bool,
 }
 /// QueryParamsRequest is the request type for the Query/Params RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsRequest {}
 /// QueryParamsResponse is the response type for the Query/Params RPC method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryParamsResponse {
     #[prost(message, optional, tag = "1")]
@@ -330,6 +336,7 @@ pub struct QueryParamsResponse {
 }
 /// QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
 /// method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySigningInfoRequest {
     /// cons_address is the address to query signing info of
@@ -338,6 +345,7 @@ pub struct QuerySigningInfoRequest {
 }
 /// QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
 /// method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySigningInfoResponse {
     /// val_signing_info is the signing info of requested val cons address
@@ -346,6 +354,7 @@ pub struct QuerySigningInfoResponse {
 }
 /// QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
 /// method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySigningInfosRequest {
     #[prost(message, optional, tag = "1")]
@@ -353,6 +362,7 @@ pub struct QuerySigningInfosRequest {
 }
 /// QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
 /// method
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuerySigningInfosResponse {
     /// info is the signing info of all validators
@@ -490,7 +500,7 @@ pub mod query_client {
 pub mod query_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    ///Generated trait containing gRPC methods that should be implemented for use with QueryServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with QueryServer.
     #[async_trait]
     pub trait Query: Send + Sync + 'static {
         /// Params queries the parameters of slashing module
@@ -691,3 +701,56 @@ pub mod query_server {
         const NAME: &'static str = "cosmos.slashing.v1beta1.Query";
     }
 }
+<<<<<<< HEAD
+=======
+/// GenesisState defines the slashing module's genesis state.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenesisState {
+    /// params defines all the paramaters of related to deposit.
+    #[prost(message, optional, tag = "1")]
+    pub params: ::core::option::Option<Params>,
+    /// signing_infos represents a map between validator addresses and their
+    /// signing infos.
+    #[prost(message, repeated, tag = "2")]
+    pub signing_infos: ::prost::alloc::vec::Vec<SigningInfo>,
+    /// missed_blocks represents a map between validator addresses and their
+    /// missed blocks.
+    #[prost(message, repeated, tag = "3")]
+    pub missed_blocks: ::prost::alloc::vec::Vec<ValidatorMissedBlocks>,
+}
+/// SigningInfo stores validator signing info of corresponding address.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SigningInfo {
+    /// address is the validator address.
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// validator_signing_info represents the signing info of this validator.
+    #[prost(message, optional, tag = "2")]
+    pub validator_signing_info: ::core::option::Option<ValidatorSigningInfo>,
+}
+/// ValidatorMissedBlocks contains array of missed blocks of corresponding
+/// address.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ValidatorMissedBlocks {
+    /// address is the validator address.
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// missed_blocks is an array of missed blocks by the validator.
+    #[prost(message, repeated, tag = "2")]
+    pub missed_blocks: ::prost::alloc::vec::Vec<MissedBlock>,
+}
+/// MissedBlock contains height and missed status as boolean.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MissedBlock {
+    /// index is the height at which the block was missed.
+    #[prost(int64, tag = "1")]
+    pub index: i64,
+    /// missed is the missed status.
+    #[prost(bool, tag = "2")]
+    pub missed: bool,
+}
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98

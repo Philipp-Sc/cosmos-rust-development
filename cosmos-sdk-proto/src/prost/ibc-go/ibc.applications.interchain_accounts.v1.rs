@@ -23,6 +23,7 @@ pub struct Metadata {
     pub tx_type: ::prost::alloc::string::String,
 }
 /// An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InterchainAccount {
     #[prost(message, optional, tag = "1")]
@@ -32,6 +33,7 @@ pub struct InterchainAccount {
     pub account_owner: ::prost::alloc::string::String,
 }
 /// InterchainAccountPacketData is comprised of a raw transaction, type of transaction and optional memo field.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InterchainAccountPacketData {
     #[prost(enumeration = "Type", tag = "1")]
@@ -42,6 +44,7 @@ pub struct InterchainAccountPacketData {
     pub memo: ::prost::alloc::string::String,
 }
 /// CosmosTx contains a list of sdk.Msg's. It should be used when sending transactions to an SDK host chain.
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CosmosTx {
     #[prost(message, repeated, tag = "1")]
@@ -68,8 +71,45 @@ impl Type {
             Type::ExecuteTx => "TYPE_EXECUTE_TX",
         }
     }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "TYPE_EXECUTE_TX" => Some(Self::ExecuteTx),
+            _ => None,
+        }
+    }
 }
+<<<<<<< HEAD
+=======
+/// Metadata defines a set of protocol specific data encoded into the ICS27 channel version bytestring
+/// See ICS004: <https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#Versioning>
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Metadata {
+    /// version defines the ICS27 protocol version
+    #[prost(string, tag = "1")]
+    pub version: ::prost::alloc::string::String,
+    /// controller_connection_id is the connection identifier associated with the controller chain
+    #[prost(string, tag = "2")]
+    pub controller_connection_id: ::prost::alloc::string::String,
+    /// host_connection_id is the connection identifier associated with the host chain
+    #[prost(string, tag = "3")]
+    pub host_connection_id: ::prost::alloc::string::String,
+    /// address defines the interchain account address to be fulfilled upon the OnChanOpenTry handshake step
+    /// NOTE: the address field is empty on the OnChanOpenInit handshake step
+    #[prost(string, tag = "4")]
+    pub address: ::prost::alloc::string::String,
+    /// encoding defines the supported codec format
+    #[prost(string, tag = "5")]
+    pub encoding: ::prost::alloc::string::String,
+    /// tx_type defines the type of transactions the interchain account can execute
+    #[prost(string, tag = "6")]
+    pub tx_type: ::prost::alloc::string::String,
+}
+>>>>>>> 2d213ea63845f9eb5407d40004e2987b4411fd98
 /// GenesisState defines the interchain accounts genesis state
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenesisState {
     #[prost(message, optional, tag = "1")]
@@ -78,6 +118,7 @@ pub struct GenesisState {
     pub host_genesis_state: ::core::option::Option<HostGenesisState>,
 }
 /// ControllerGenesisState defines the interchain accounts controller genesis state
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ControllerGenesisState {
     #[prost(message, repeated, tag = "1")]
@@ -90,6 +131,7 @@ pub struct ControllerGenesisState {
     pub params: ::core::option::Option<super::controller::v1::Params>,
 }
 /// HostGenesisState defines the interchain accounts host genesis state
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HostGenesisState {
     #[prost(message, repeated, tag = "1")]
@@ -102,6 +144,7 @@ pub struct HostGenesisState {
     pub params: ::core::option::Option<super::host::v1::Params>,
 }
 /// ActiveChannel contains a connection ID, port ID and associated active channel ID
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActiveChannel {
     #[prost(string, tag = "1")]
@@ -112,6 +155,7 @@ pub struct ActiveChannel {
     pub channel_id: ::prost::alloc::string::String,
 }
 /// RegisteredInterchainAccount contains a connection ID, port ID and associated interchain account address
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegisteredInterchainAccount {
     #[prost(string, tag = "1")]
